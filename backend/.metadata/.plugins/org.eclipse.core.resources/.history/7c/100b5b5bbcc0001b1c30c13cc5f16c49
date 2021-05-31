@@ -1,0 +1,36 @@
+package com.portal.portalec.service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.portal.portalec.dto.DepartamentoResponse;
+import com.portal.portalec.entities.Departamento;
+import com.portal.portalec.repositories.DepartamentoRepository;
+
+@Service
+public class DepartamentoService {
+    @Autowired 
+	private DepartamentoRepository departamentoRepository;
+	
+	public List<DepartamentoResponse> findAll(){
+		List<Departamento> result = departamentoRepository.findAll(Sort.by(Sort.Direction.ASC, "nome"));
+		// converte o resultado para o dto depatamento response
+		return result.stream().map( x -> new DepartamentoResponse(x)).collect(Collectors.toList());
+	}
+	
+	
+	public ResponseEntity<DepartamentoResponse>  findById(Long departamentoId){
+		return departamentoRepository.findById(departamentoId)
+				//	.map(cliente -> ResponseEntity.ok(cliente))
+					.map(ResponseEntity::ok) // recurso method reference. referencia o metodo ok do Response entity. essa linha tem a mesma funcionalidade da linha acima
+					.orElse(ResponseEntity.notFound().build());
+			
+		// converte o resultado para o dto depatamento response
+	//	return result.stream().map( x -> new DepartamentoResponse(x)).collect(Collectors.toList());
+	}
+}

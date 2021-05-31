@@ -1,0 +1,5 @@
+package com.portal.portalec.dto;
+
+public class MarcaRequest {
+
+}

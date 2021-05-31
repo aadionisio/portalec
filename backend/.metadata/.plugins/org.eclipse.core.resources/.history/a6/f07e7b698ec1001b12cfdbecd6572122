@@ -1,0 +1,9 @@
+package com.portal.portalec.repositories;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.portal.portalec.entities.Secao;
+
+public interface SecaoRepository extends JpaRepository<Secao, Long> {
+
+}

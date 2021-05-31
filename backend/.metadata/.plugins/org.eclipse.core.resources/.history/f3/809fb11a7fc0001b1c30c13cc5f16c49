@@ -1,0 +1,15 @@
+package com.portal.portalec.dto;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+public class DepartamentoDTO implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
+	private Long id;
+	private String nome;
+}

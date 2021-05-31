@@ -1,0 +1,17 @@
+package com.portal.portalec.service;
+
+import org.springframework.stereotype.Service;
+
+import com.portal.portalec.assembler.LinhaProdutoAssembler;
+import com.portal.portalec.repositories.LinhaProdutoRepository;
+
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+@Service
+public class LinhaProdutoService {
+	
+	private LinhaProdutoRepository linhaProdutoRepository;
+    private LinhaProdutoAssembler linhaProdutoAssembler;
+
+}

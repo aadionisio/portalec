@@ -1,0 +1,28 @@
+package com.portal.portalec.service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+
+import com.portal.portalec.assembler.LinhaProdutoAssembler;
+import com.portal.portalec.dto.LinhaProdutoResponse;
+import com.portal.portalec.entities.LinhaProduto;
+import com.portal.portalec.repositories.LinhaProdutoRepository;
+
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+@Service
+public class LinhaProdutoService {
+	
+	private LinhaProdutoRepository linhaProdutoRepository;
+    private LinhaProdutoAssembler linhaProdutoAssembler;
+
+	public List<LinhaProdutoResponse> findAll(){
+		List<LinhaProduto> result = linhaProdutoRepository.findAll(Sort.by(Sort.Direction.ASC, "nome"));
+		// converte o resultado para o dto depatamento response
+		return result.stream().map( x -> new LinhaProdutoResponse(x)).collect(Collectors.toList());
+	}
+}
