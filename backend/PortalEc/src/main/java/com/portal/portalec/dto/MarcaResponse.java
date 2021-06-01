@@ -15,7 +15,7 @@ public class MarcaResponse implements Serializable {
 	
 	private Long id;
 	private String nome;
-	//private List<Secao> secao;
+
 	
 	//construtor padrao
 	public MarcaResponse() {
@@ -30,8 +30,6 @@ public class MarcaResponse implements Serializable {
 	public MarcaResponse(Marca entity) {
 		id = entity.getId();
 		nome = entity.getNome();
-		//entity.getSecoes()
-		//secao = entity.getSecoes();//.stream().map(SecaoResponse::new).collect(Collectors.toList());
 	}
 	
 

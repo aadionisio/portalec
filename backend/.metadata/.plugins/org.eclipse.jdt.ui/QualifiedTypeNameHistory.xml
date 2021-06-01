@@ -29,4 +29,5 @@
     <fullyQualifiedTypeName name="com.portal.portalec.assembler.SecaoAssembler"/>
     <fullyQualifiedTypeName name="com.portal.portalec.repositories.DepartamentoRepository"/>
     <fullyQualifiedTypeName name="javax.persistence.CascadeType"/>
+    <fullyQualifiedTypeName name="javax.validation.constraints.NotNull"/>
 </qualifiedTypeNameHistroy>
