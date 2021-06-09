@@ -1,0 +1,30 @@
+package com.portal.portalec.service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+
+import com.portal.portalec.assembler.ModuloAssembler;
+import com.portal.portalec.dto.DepartamentoResponse;
+import com.portal.portalec.dto.ModuloResponse;
+import com.portal.portalec.entities.Modulo;
+import com.portal.portalec.repositories.ModuloRepository;
+
+import lombok.AllArgsConstructor;
+
+
+@AllArgsConstructor
+@Service
+public class ModuloService {
+
+	private ModuloRepository moduloRepository;
+    private ModuloAssembler moduloAssembler;
+    
+	public List<ModuloResponse> findAll(){
+		List<Modulo> result = moduloRepository.findAll(Sort.by(Sort.Direction.ASC, "nome"));
+		// converte o resultado para o dto depatamento response
+		return result.stream().map( x -> new ModuloResponse(x)).collect(Collectors.toList());
+	}
+}

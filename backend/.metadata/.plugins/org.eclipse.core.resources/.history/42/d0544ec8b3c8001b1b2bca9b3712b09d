@@ -1,0 +1,17 @@
+package com.portal.portalec.service;
+
+import org.springframework.stereotype.Service;
+
+import com.portal.portalec.assembler.DepartamentoAssembler;
+import com.portal.portalec.repositories.DepartamentoRepository;
+
+import lombok.AllArgsConstructor;
+
+
+@AllArgsConstructor
+@Service
+public class ModuloService {
+
+	private DepartamentoRepository departamentoRepository;
+    private DepartamentoAssembler departamentoAssembler;
+}

@@ -5,12 +5,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.portal.portalec.assembler.ProdutoAssembler;
 import com.portal.portalec.dto.ProdutoRequestCadastro;
 import com.portal.portalec.dto.ProdutoResponseCadastro;
+import com.portal.portalec.dto.ProdutoResponsePesquisaCompleta;
 import com.portal.portalec.entities.Departamento;
 import com.portal.portalec.entities.LinhaProduto;
 import com.portal.portalec.entities.Marca;
@@ -39,12 +41,21 @@ public class ProdutoService {
  	private LinhaProdutoRepository linhaProdutoRepository;
  	
  	
-	public List<ProdutoResponseCadastro> findAll(){
+	public List<ProdutoResponsePesquisaCompleta> findAll(){
 		List<Produto> result = produtoRepository.findAll(Sort.by(Sort.Direction.ASC, "descricao"));
 		// converte o resultado para o dto depatamento response
-		return result.stream().map( x -> new ProdutoResponseCadastro(x)).collect(Collectors.toList());
+		return result.stream().map( x -> new ProdutoResponsePesquisaCompleta(x)).collect(Collectors.toList());
 	}
 	
+	
+	public ResponseEntity<ProdutoResponseCadastro>  findById(Long produtoId){
+		
+		
+		return produtoRepository.findById(produtoId)
+				   .map(produto -> ResponseEntity.ok(produtoAssembler.toModelProdutoCadastro(produto)))
+				   .orElse(ResponseEntity.notFound().build());
+			
+	}
 	
 	@Transactional
 	public ProdutoResponseCadastro cadastrar(ProdutoRequestCadastro produto) {

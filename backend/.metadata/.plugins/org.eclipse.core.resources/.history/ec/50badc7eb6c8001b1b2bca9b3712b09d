@@ -1,0 +1,28 @@
+package com.portal.portalec.controllers;
+
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.portal.portalec.dto.DepartamentoResponse;
+import com.portal.portalec.service.ModuloService;
+
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+@RestController
+@RequestMapping(value = "/modulos")
+public class ModuloController {
+	
+	private ModuloService moduloService;
+	
+	
+    @GetMapping
+    public ResponseEntity<List<ModuloResponse>> findAll() {
+    	List<ModuloResponse> list = moduloService.findAll();
+    	return ResponseEntity.ok(list);
+    }
+}
