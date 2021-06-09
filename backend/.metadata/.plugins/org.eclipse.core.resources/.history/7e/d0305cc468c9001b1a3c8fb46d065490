@@ -35,16 +35,4 @@ public class Modulo {
 	@OneToMany(mappedBy = "modulo", cascade = CascadeType.ALL)
 	private List<SubModulo> submodulos = new ArrayList<>();
 
-	public SubModulo adicionarSubModuloDescricao(String descricao) {
-		SubModulo subModulo = new SubModulo();
-		
-		subModulo.setNome(descricao);
-		subModulo.setModulo(this);
-		
-		this.getSubmodulos().add(subModulo);
-		
-		
-		return subModulo; 
-	}
-
 }

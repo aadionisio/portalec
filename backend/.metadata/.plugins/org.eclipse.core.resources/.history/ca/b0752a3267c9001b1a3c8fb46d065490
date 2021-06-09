@@ -1,0 +1,18 @@
+package com.portal.portalec.service;
+
+import org.springframework.stereotype.Service;
+
+import com.portal.portalec.assembler.SubModuloAssembler;
+import com.portal.portalec.repositories.ModuloRepository;
+import com.portal.portalec.repositories.SubModuloRepository;
+
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+@Service
+public class SubModuloService {
+
+ 	private SubModuloRepository subModuloRepository;
+ 	private SubModuloAssembler subModuloAssembler;
+ 	private ModuloRepository ModuloRepository;
+}

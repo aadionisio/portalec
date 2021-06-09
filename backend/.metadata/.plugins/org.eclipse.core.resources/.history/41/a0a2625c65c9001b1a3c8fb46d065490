@@ -22,12 +22,12 @@ import lombok.AllArgsConstructor;
 @Service
 public class SecaoService {
 
- 	private SecaoRepository secaoRepository;
+ 	private SecaoRepository secaoRepositoty;
  	private SecaoAssembler secaoAssembler;
  	private DepartamentoRepository departamentoRepository;
 	
 	public List<SecaoResponse> findAll(){
-		List<Secao> result = secaoRepository.findAll(Sort.by(Sort.Direction.ASC, "nome"));
+		List<Secao> result = secaoRepositoty.findAll(Sort.by(Sort.Direction.ASC, "nome"));
 		// converte o resultado para o dto depatamento response
 		return result.stream().map( x -> new SecaoResponse(x)).collect(Collectors.toList());
 	}
@@ -37,14 +37,14 @@ public class SecaoService {
 	public ResponseEntity<SecaoResponse>  findById(Long secaoId){
 		
 		
-		return secaoRepository.findById(secaoId)
+		return secaoRepositoty.findById(secaoId)
 				   .map(secao -> ResponseEntity.ok(secaoAssembler.toModel(secao)))
 				   .orElse(ResponseEntity.notFound().build());
 			
 	}
 	
 	public List<SecaoResponse>  findByNome(String secao){
-		return secaoAssembler.toCollectionModel(secaoRepository.findByNomeContainingIgnoreCase(secao));
+		return secaoAssembler.toCollectionModel(secaoRepositoty.findByNomeContainingIgnoreCase(secao));
 	}
 	
 	@Transactional
@@ -62,7 +62,7 @@ public class SecaoService {
 	@Transactional
 	public ResponseEntity<SecaoResponse> alterar(Long secaoId , String descricao) {
 		
-		Secao secao = secaoRepository.findById(secaoId)
+		Secao secao = secaoRepositoty.findById(secaoId)
 				                     .orElseThrow(() -> new NegocioException("Secao não localizada! Verifique os dados e tente novamente!"));
 		
 //		Departamento departamento = departamentoRepository.findById(departamentoId)
@@ -71,7 +71,7 @@ public class SecaoService {
 		secao.getDepartamento();
 		secao.setNome(descricao);
 		
-		secaoRepository.save(secao);	
+		secaoRepositoty.save(secao);	
 		
 		return ResponseEntity.ok(secaoAssembler.toModel(secao));
 		
