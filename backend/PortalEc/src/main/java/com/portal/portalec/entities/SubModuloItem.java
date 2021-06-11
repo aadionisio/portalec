@@ -31,5 +31,5 @@ public class SubModuloItem {
 	
 	@ManyToOne
 	@JoinColumn(name = "submodulo_id")
-	private SubModulo submodulo;
+	private SubModulo subModulo;
 }

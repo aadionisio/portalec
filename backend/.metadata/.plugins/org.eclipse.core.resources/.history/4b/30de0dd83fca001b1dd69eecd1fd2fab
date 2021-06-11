@@ -1,0 +1,38 @@
+package com.portal.portalec.service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+
+import com.portal.portalec.assembler.SubModuloItemAssembler;
+import com.portal.portalec.dto.SubModuloItemResponse;
+import com.portal.portalec.dto.SubModuloResponse;
+import com.portal.portalec.entities.SubModulo;
+import com.portal.portalec.entities.SubModuloItem;
+import com.portal.portalec.exception.NegocioException;
+import com.portal.portalec.repositories.SubModuloItemRepository;
+import com.portal.portalec.repositories.SubModuloRepository;
+
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+@Service
+public class SubModuloItemService {
+
+ 	private SubModuloItemRepository subModuloItemRepository;
+ 	private SubModuloItemAssembler subModuloItemAssembler;
+ 	private SubModuloRepository subModuloRepository;
+ 	
+ 	
+	public List<SubModuloItemResponse> findByModulo(Long subModuloId){
+		
+		SubModulo subModulo = subModuloRepository.findById(subModuloId)
+										   .orElseThrow(() -> new NegocioException("Sub-Modulo não localizado! Verifique os dados e tente novamente!"));
+		
+		
+		List<SubModuloItem> result = subModuloItemRepository.findBySubModulo(subModulo);
+		// converte o resultado para o dto depatamento response
+		return result.stream().map( x -> new SubModuloResponse(x)).collect(Collectors.toList());
+	}
+}

@@ -1,0 +1,29 @@
+package com.portal.portalec.controllers;
+
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.portal.portalec.dto.SubModuloItemResponse;
+import com.portal.portalec.service.SubModuloItemService;
+
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+@RestController
+@RequestMapping(value = "/modulo/{moduloId}/submodulo/{subModuloId}/submoduloitems")
+public class SubModuloItemController {
+	
+	private SubModuloItemService subModuloItemService;
+
+	@GetMapping
+	public ResponseEntity<List<SubModuloItemResponse>> buscar(@PathVariable Long subModuloId ){
+    	List<SubModuloItemResponse> list = subModuloItemService.findBySubModulo(subModuloId);
+    	return ResponseEntity.ok(list);
+
+	}
+}

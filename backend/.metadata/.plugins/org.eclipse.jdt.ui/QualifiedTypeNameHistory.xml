@@ -16,7 +16,6 @@
     <fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="com.portal.portalec.assembler.DepartamentoAssembler"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="org.springframework.transaction.annotation.Transactional"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PutMapping"/>
     <fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
@@ -33,4 +32,5 @@
     <fullyQualifiedTypeName name="com.portal.portalec.dto.ProdutoRequestCadastro"/>
     <fullyQualifiedTypeName name="com.portal.portalec.dto.DepartamentoResponse"/>
     <fullyQualifiedTypeName name="com.portal.portalec.dto.SecaoResponse"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
 </qualifiedTypeNameHistroy>
