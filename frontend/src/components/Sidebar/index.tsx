@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
+
 import { Nav, NavIcon, SideBarNav, SideBarWrap } from './styles';
 import { SideBarData } from 'components/SidebarData';
 

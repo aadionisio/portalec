@@ -1,10 +1,7 @@
-import * as FaIcons from 'react-icons/fa';
+//import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import * as IoIcons from 'react-icons/io';
 import * as RiIcons from 'react-icons/ri';
-import * as DinamicIcons from 'components/ComponentIconDimamic'
-
-import JsxParser from 'react-jsx-parser';
 
 // teremos os dados do menu dinamico
 
@@ -12,7 +9,7 @@ export const SideBarData = [
   {
     title: 'DashBoard',
     path: '/dashboard',
-    icon: <DinamicIcons.DynamicAiIcons name="AiFillHome" />,
+    icon: <AiIcons.AiFillHome />,
     iconClosed: <RiIcons.RiArrowDownSFill />,
     iconOpened: <RiIcons.RiArrowUpSFill />,
     subNav: [
