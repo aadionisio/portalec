@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.portal.portalec.assembler.SubModuloAssembler;
+import com.portal.portalec.dto.SubModuloRequest;
 import com.portal.portalec.dto.SubModuloResponse;
 import com.portal.portalec.entities.Modulo;
 import com.portal.portalec.entities.SubModulo;
@@ -39,29 +40,51 @@ public class SubModuloService {
 	
 	
 	@Transactional
-	public SubModuloResponse cadastrar(Long moduloId, String descricao) {
+	public SubModuloResponse cadastrar(Long moduloId, SubModuloRequest subModuloRequest) {
 		
 		Modulo modulo = moduloRepository.findById(moduloId)
                 .orElseThrow(() -> new NegocioException("Modulo não localizado! Verifique os dados e tente novamente!"));
 		
 		
-		SubModulo subModuloGravado = modulo.adicionarSubModuloDescricao(descricao);
+		SubModulo subModuloGravado = modulo.adicionarSubModulo(subModuloRequest.getNome()
+															 , subModuloRequest.getCaminhorota()
+															 , subModuloRequest.getIcone()
+															 , subModuloRequest.getIconeAberto()
+															 , subModuloRequest.getIconeFechado());
+		
+		
 		return subModuloAssembler.toModel(subModuloGravado);
 		
 	}
 	
 	
 	@Transactional
-	public ResponseEntity<SubModuloResponse> alterar(Long subModuloId , String descricao) {
+	public ResponseEntity<SubModuloResponse> alterar(Long subModuloId , SubModuloRequest subModuloRequest) {
 		
 		SubModulo subModulo = subModuloRepository.findById(subModuloId)
 				                     .orElseThrow(() -> new NegocioException("Sub-Modulo não localizada! Verifique os dados e tente novamente!"));
 		
-//		Departamento departamento = departamentoRepository.findById(departamentoId)
-//                .orElseThrow(() -> new NegocioException("Departamento não localizado! Verifique os dados e tente novamente!"));
-//		
+		//campos obrigatorios
 		subModulo.getModulo();
-		subModulo.setNome(descricao);
+		subModulo.setNome(subModuloRequest.getNome());
+		subModulo.setCaminhorota(subModuloRequest.getCaminhorota());
+		
+		
+		// campos opcionais
+		
+		if ( subModuloRequest.getIcone() != null ) {
+			subModulo.setIcone(subModuloRequest.getIcone() );
+		}
+		
+		if (subModuloRequest.getIconeAberto()  != null ) {
+			subModulo.setIconeAberto(subModuloRequest.getIconeAberto() );
+		}
+		
+		if ( subModuloRequest.getIconeFechado()  != null ) {
+			subModulo.setIconeFechado(subModuloRequest.getIconeFechado() );
+		}
+		
+		
 		
 		subModuloRepository.save(subModulo);	
 		

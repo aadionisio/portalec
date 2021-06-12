@@ -15,21 +15,23 @@ public class SubModuloResponse implements Serializable {
 	
 	private Long id;
 	private String nome;
+	private String caminhorota;
 	
 	//construtor padrao
 	public SubModuloResponse() {
 	}
 	
-	public SubModuloResponse(Long id, String nome) {
-	
+	public SubModuloResponse(Long id, String nome, String caminhorota ) {
 		this.id = id;
 		this.nome = nome;
+		this.caminhorota = caminhorota;
 	}
 
 	public SubModuloResponse(SubModulo entity) {
 		
 		id = entity.getId();
 		nome = entity.getNome();
+		caminhorota = entity.getCaminhorota();
 	}	
 
 }

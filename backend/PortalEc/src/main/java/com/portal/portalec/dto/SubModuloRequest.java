@@ -13,4 +13,11 @@ public class SubModuloRequest implements Serializable {
 	
 	private String nome;
 	
+	private String caminhorota;
+	
+	private String icone ;
+
+	private String iconeAberto;
+	
+	private String iconeFechado ;	
 }

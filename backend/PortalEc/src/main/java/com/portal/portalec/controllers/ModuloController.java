@@ -37,12 +37,12 @@ public class ModuloController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public ModuloResponse incluir(@RequestBody ModuloRequest moduloRequest ) {
 			
-		return   moduloService.cadastrar(moduloRequest.getNome());
+		return   moduloService.cadastrar(moduloRequest);
 	}
 	
 	@PutMapping("/{moduloId}")
 	public ResponseEntity<ModuloResponse> alterar(@PathVariable Long moduloId,  @RequestBody ModuloRequest moduloRequest ) {
 			
-		return   moduloService.alterar(moduloId, moduloRequest.getNome());
+		return   moduloService.alterar(moduloId, moduloRequest);
 	}
 }

@@ -30,7 +30,7 @@ public class Departamento {
 	@Column(name = "descricao")
 	@NotBlank
 	@Size(max = 50)
-	private String nome;
+	private String nome ;
 	
 	@OneToMany(mappedBy = "departamento", cascade = CascadeType.ALL)
 	private List<Secao> secoes = new ArrayList<>();

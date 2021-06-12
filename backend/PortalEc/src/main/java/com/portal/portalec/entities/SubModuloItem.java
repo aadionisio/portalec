@@ -29,6 +29,15 @@ public class SubModuloItem {
 	@Size(max = 50)
 	private String nome;
 	
+	@Column
+	@NotBlank
+	@Size(max = 100)
+	private String caminhorota;	
+
+	@Column
+	@Size(max = 100)	
+	private String icone = "AiIcons.AiFillHome";
+	
 	@ManyToOne
 	@JoinColumn(name = "submodulo_id")
 	private SubModulo subModulo;

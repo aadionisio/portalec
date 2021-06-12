@@ -37,12 +37,12 @@ public class SubModuloController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public SubModuloResponse incluir(@PathVariable Long moduloId, @RequestBody SubModuloRequest subModuloRequest ) {
 		
-		return  subModuloService.cadastrar(moduloId, subModuloRequest.getNome());
+		return  subModuloService.cadastrar(moduloId, subModuloRequest);
 	}
 	
 	@PutMapping("/{subModuloId}")
 	public ResponseEntity<SubModuloResponse> alterar(@PathVariable Long subModuloId,  @RequestBody SubModuloRequest subModuloRequest  ) {
 			
-		return   subModuloService.alterar(subModuloId, subModuloRequest.getNome());
+		return   subModuloService.alterar(subModuloId, subModuloRequest);
 	}
 }

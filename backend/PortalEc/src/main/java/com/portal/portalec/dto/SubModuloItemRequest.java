@@ -12,4 +12,7 @@ public class SubModuloItemRequest implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private String nome;
+	private String caminhorota;
+	
+	private String icone ;
 }

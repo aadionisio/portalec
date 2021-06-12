@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.portal.portalec.assembler.SubModuloItemAssembler;
+import com.portal.portalec.dto.SubModuloItemRequest;
 import com.portal.portalec.dto.SubModuloItemResponse;
 import com.portal.portalec.entities.SubModulo;
 import com.portal.portalec.entities.SubModuloItem;
@@ -38,27 +39,36 @@ public class SubModuloItemService {
 	}
 	
 	@Transactional
-	public SubModuloItemResponse cadastrar(Long subModuloId, String descricao) {
+	public SubModuloItemResponse cadastrar(Long subModuloId, SubModuloItemRequest subModuloItemRequest) {
 		
 		SubModulo subModulo = subModuloRepository.findById(subModuloId)
                 .orElseThrow(() -> new NegocioException("Sub-Modulo não localizado! Verifique os dados e tente novamente!"));
 		
 		
-		SubModuloItem subModuloItemGravado = subModulo.adicionarSubModuloItemDescricao(descricao);
+		SubModuloItem subModuloItemGravado = subModulo.adicionarSubModuloItem(subModuloItemRequest.getNome()
+																			 ,subModuloItemRequest.getCaminhorota()
+																			 ,subModuloItemRequest.getIcone());
 		return subModuloItemAssembler.toModel(subModuloItemGravado);
 		
 	}
 	
 	
 	@Transactional
-	public ResponseEntity<SubModuloItemResponse> alterar(Long subModuloItemId , String descricao) {
+	public ResponseEntity<SubModuloItemResponse> alterar(Long subModuloItemId , SubModuloItemRequest subModuloItemRequest) {
 		
 		SubModuloItem subModuloItem = subModuloItemRepository.findById(subModuloItemId)
 				                     .orElseThrow(() -> new NegocioException("Item do Sub-Modulo não localizado! Verifique os dados e tente novamente!"));
 		
 		subModuloItem.getSubModulo();
-		subModuloItem.setNome(descricao);
+		subModuloItem.setNome(subModuloItemRequest.getNome());
+		subModuloItem.setCaminhorota(subModuloItemRequest.getCaminhorota());
 		
+		// campos opcionais
+		
+		if ( subModuloItemRequest.getIcone() != null ) {
+			subModuloItem.setIcone(subModuloItemRequest.getIcone() );
+		}
+
 		subModuloItemRepository.save(subModuloItem);	
 		
 		return ResponseEntity.ok(subModuloItemAssembler.toModel(subModuloItem));

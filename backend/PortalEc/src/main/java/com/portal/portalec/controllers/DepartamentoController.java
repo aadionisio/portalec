@@ -41,7 +41,9 @@ public class DepartamentoController {
 	//metodo para buscar um departamento por nome (fragmento)
 	@GetMapping("/consultapornome")
 	public List<DepartamentoResponse> buscarPorNome(@RequestBody DepartamentoRequest departamentoRequest){
-		return departamentoService.findByNome(departamentoRequest.getNome());
+	return departamentoService.findByNome( departamentoRequest.getNome() == null ? "a" : departamentoRequest.getNome()  );
+		
+		
 	}
 	
 	

@@ -32,14 +32,47 @@ public class Modulo {
 	@Size(max = 50)
 	private String nome;
 	
+	@Column
+	@NotBlank
+	@Size(max = 100)
+	private String caminhorota;	
+
+	@Column
+	@Size(max = 100)	
+	private String icone = "AiIcons.AiFillHome";
+	
+	@Column(name = "iconeaberto")
+	@Size(max = 100)	
+	private String iconeAberto = "RiIcons.RiArrowUpSFill";
+	
+	@Column(name = "iconefechado")
+	@Size(max = 100)
+	private String iconeFechado = "RiIcons.RiArrowDownSFill";
+	
 	@OneToMany(mappedBy = "modulo", cascade = CascadeType.ALL)
 	private List<SubModulo> submodulos = new ArrayList<>();
 
-	public SubModulo adicionarSubModuloDescricao(String descricao) {
+	public SubModulo adicionarSubModulo(String descricao, String caminhorota, String icone, String iconeAberto, String iconeFechado  ) {
 		SubModulo subModulo = new SubModulo();
 		
+		// campos obrigatorios
 		subModulo.setNome(descricao);
+		subModulo.setCaminhorota(caminhorota);
 		subModulo.setModulo(this);
+		
+		//campos opcionais
+		if ( icone != null ) {
+			subModulo.setIcone(icone);
+		}
+		
+		if ( iconeAberto != null ) {
+			subModulo.setIconeAberto(iconeAberto);
+		}
+		
+		if ( iconeFechado != null ) {
+			subModulo.setIconeFechado(iconeFechado);
+		}
+		
 		
 		this.getSubmodulos().add(subModulo);
 		

@@ -17,18 +17,23 @@ public class ModuloResponse implements Serializable {
 	private Long id;
 	private String nome;
 	
+	private String caminhorota;
+	
 	//construtor padrao
 	public ModuloResponse() {
 	}
 	// construtor com campos
-	public ModuloResponse(Long id, String nome) {
+	public ModuloResponse(Long id, String nome, String caminhorota) {
 		this.id = id;
 		this.nome = nome;
+		this.caminhorota = caminhorota;
+		
 	}
 	
 	//construtor com entidade
 	public ModuloResponse(Modulo entity) {
 		id = entity.getId();
 		nome = entity.getNome();
+		caminhorota = entity.getCaminhorota();
 	}
 }

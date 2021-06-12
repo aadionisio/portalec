@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.portal.portalec.assembler.ModuloAssembler;
+import com.portal.portalec.dto.ModuloRequest;
 import com.portal.portalec.dto.ModuloResponse;
 import com.portal.portalec.entities.Modulo;
 import com.portal.portalec.exception.NegocioException;
@@ -32,11 +33,27 @@ public class ModuloService {
 	
 	
 	@Transactional
-	public ModuloResponse cadastrar(String descricao) {
+	public ModuloResponse cadastrar(ModuloRequest moduloRequest) {
 		
 		Modulo modulo = new Modulo();
+
+		// campos obrigatorios
+		modulo.setNome(moduloRequest.getNome());
+		modulo.setCaminhorota(moduloRequest.getCaminhorota());
 		
-		modulo.setNome(descricao);
+		//campos opcionais
+		
+		if ( moduloRequest.getIcone() != null ) {
+			modulo.setIcone(moduloRequest.getIcone());
+		}
+		
+		if ( moduloRequest.getIconeAberto() != null  ) {
+			modulo.setIconeAberto(moduloRequest.getIconeAberto());
+		}
+		
+		if ( moduloRequest.getIconeFechado() != null ) {
+			modulo.setIconeFechado(moduloRequest.getIconeFechado());
+		}
 		
 		moduloRepository.save(modulo);	
 		
@@ -45,12 +62,29 @@ public class ModuloService {
 	}
 		
 	@Transactional
-	public ResponseEntity<ModuloResponse> alterar(Long moduloId , String descricao) {
+	public ResponseEntity<ModuloResponse> alterar(Long moduloId , ModuloRequest moduloRequest) {
 		
 		Modulo modulo = moduloRepository.findById(moduloId)
 				                        .orElseThrow(() -> new NegocioException("Modulo não localizado! Verifique os dados e tente novamente!"));;
 		
-		modulo.setNome(descricao);
+		// campos obrigatorios
+		modulo.setNome(moduloRequest.getNome());
+		modulo.setCaminhorota(moduloRequest.getCaminhorota());
+		
+		//campos opcionais
+		
+		if ( moduloRequest.getIcone() != null ) {
+			modulo.setIcone(moduloRequest.getIcone());
+		}
+		
+		if ( moduloRequest.getIconeAberto() != null  ) {
+			modulo.setIconeAberto(moduloRequest.getIconeAberto());
+		}
+		
+		if ( moduloRequest.getIconeFechado() != null ) {
+			modulo.setIconeFechado(moduloRequest.getIconeFechado());
+		}
+		
 		
 		moduloRepository.save(modulo);	
 		

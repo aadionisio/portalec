@@ -37,13 +37,13 @@ public class SubModuloItemController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public SubModuloItemResponse incluir(@PathVariable Long subModuloId, @RequestBody SubModuloItemRequest subModuloItemRequest ) {
 		
-		return  subModuloItemService.cadastrar(subModuloId, subModuloItemRequest.getNome());
+		return  subModuloItemService.cadastrar(subModuloId, subModuloItemRequest);
 	}
 	
 	@PutMapping("/{subModuloItemId}")
 	public ResponseEntity<SubModuloItemResponse> alterar(@PathVariable Long subModuloItemId,  @RequestBody SubModuloItemRequest subModuloItemRequest  ) {
 			
-		return   subModuloItemService.alterar(subModuloItemId, subModuloItemRequest.getNome());
+		return   subModuloItemService.alterar(subModuloItemId, subModuloItemRequest);
 	}
 	
 }
